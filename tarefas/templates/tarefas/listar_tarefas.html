@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Minhas Tarefas</title>
+    <style>
+        .concluida {color: green; text-decoration: line-through;}
+        .pendente {color: red; font-weight: bold;}
+        table {width: 100%; border-collapse: collapse;}
+        th, td {border: 1px solid #ddd; padding: 8px; text-align: left;}
+    </style>
+</head>
+<body>
+    <h1>Gerenciador de Tarefas de Equipe</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Tarefa</th>
+                <th>Prioridade</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tarefa in tarefas %}
+            <tr>
+                <td>{{ tarefa.titulo }}</td>
+                <td>{{ tarefa.get_prioridade_display}}</td>
+                <td>
+                    {% if tarefa.concluida %}
+                        <span class="concluida">Concluída</span>
+                    {% else %}
+                        <span class="pendente">Pendente</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+    <tr>
+        <td colspan="3" style="text-align: center;">Nenhuma tarefa cadastrada ainda. Vá ao Admin para adicionar!</td>
+    </tr>
+    {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
